@@ -1,0 +1,1 @@
+export { Workplace } from "./workplace-initializator";

@@ -1,0 +1,1 @@
+export { ShapesInit } from "./shapes-initializator";

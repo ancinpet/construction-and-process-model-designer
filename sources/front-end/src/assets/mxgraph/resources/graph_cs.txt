@@ -1,0 +1,11 @@
+﻿alreadyConnected=Uzly jsou již spojeny
+containsValidationErrors=Obsahuje ověřené chyby
+updatingDocument=Aktualizuji dokument. Prosím čekejte...
+updatingSelection=Aktualizuji výběr. Prosím čekejte...
+collapse-expand=Sklapnout/Rozšířit
+doubleClickOrientation=Pro změnu orientace použijte dvojklik
+close=Zavřít
+error=Chyba
+done=Hotovo
+cancel=Zrušit
+ok=OK

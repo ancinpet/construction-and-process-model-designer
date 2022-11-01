@@ -1,0 +1,137 @@
+<mat-toolbar style="height:15px">
+</mat-toolbar>
+<div>
+	<div style="width: 30px; float:left">
+		<button mat-icon-button>
+			<mat-icon class="iconInHeader">insert_drive_file</mat-icon>
+		</button>
+	</div>
+	<div class="col-10">
+		<mat-toolbar style="height:60px">
+			<mat-toolbar-row style="height:30px">
+				<div class="col-iconInHeaderPlaceHolder">
+				</div>
+				<!-- hack workaround div with angular classes instead of mat-form-field because
+					 mat-form-field-wrapper padding interfering with toolbar underneath -->
+				<div class="modelNameInput mat-form-field ng-tns-c5-0 mat-primary mat-form-field-type-mat-input mat-form-field-can-float ng-pristine ng-valid ng-touched">
+					<input matInput #modelNameInput placeholder="Untitled model" [(ngModel)]="modelName"
+						(ngModelChange)="onModelNameChange()">
+				</div>
+			</mat-toolbar-row>
+
+			<mat-toolbar-row style="height:30px">
+				<button mat-button style="text-align:left" [matMenuTriggerFor]="fileMenu">File</button>
+				<mat-menu #fileMenu="matMenu">
+					<button mat-menu-item (click)="onNewModel()">New</button>
+					<button mat-menu-item (click)="onExportModel()">Export</button>
+					<button mat-menu-item (click)="fileInput.value=''; fileInput.click()">Import</button>
+					<input type="file" #fileInput style="display:none" [accept]="fileIoManager.contractFileExtension"
+						(change)="onImportModel(fileInput.files)">
+				</mat-menu>
+
+				<button mat-button style="text-align:left" [matMenuTriggerFor]="editMenu">Edit</button>
+				<mat-menu #editMenu="matMenu">
+					<button mat-menu-item (click)="onUndoChange()">Undo</button>
+					<button mat-menu-item (click)="onRedoChange()">Redo</button>
+				</mat-menu>
+
+				<button mat-button style="text-align:left" [matMenuTriggerFor]="viewMenu">View</button>
+				<mat-menu #viewMenu="matMenu">
+					<button mat-menu-item (click)="togglePropertyBar()">Properties</button>
+				</mat-menu>
+
+				<button mat-button style="text-align:left" [matMenuTriggerFor]="insertMenu">Insert</button>
+				<mat-menu #insertMenu="matMenu">
+					<button mat-menu-item>Placeholder</button>
+				</mat-menu>
+
+				<button mat-button style="text-align:left" [matMenuTriggerFor]="formatMenu">Format</button>
+				<mat-menu #formatMenu="matMenu">
+					<button mat-menu-item>Placeholder</button>
+				</mat-menu>
+
+				<button mat-button style="text-align:left" [matMenuTriggerFor]="helpMenu">Help</button>
+				<mat-menu #helpMenu="matMenu">
+					<button mat-menu-item>Quick start video</button>
+					<button mat-menu-item>User manual</button>
+					<button mat-menu-item>Keyboard shortcuts</button>
+					<button mat-menu-item>Feedback</button>
+					<button mat-menu-item>Support</button>
+					<button mat-menu-item>About</button>
+				</mat-menu>
+				<app-connection-status></app-connection-status>
+			</mat-toolbar-row>
+
+		</mat-toolbar>
+	</div>
+	<div style="float: right">
+		<mat-toolbar>
+			<button mat-raised-button color="primary">Generate contract</button>
+			<div class="col-iconInHeaderPlaceHolder">
+			</div>
+		</mat-toolbar>
+	</div>
+
+	<mat-toolbar style="height:30px">
+		<button mat-icon-button matTooltip="Print" id="toolbar-print">
+			<mat-icon>print</mat-icon>
+		</button>
+		<button mat-icon-button matTooltip="Export image" id="toolbar-export">
+			<mat-icon>image</mat-icon>
+		</button>
+		<button mat-icon-button (click)="onSaveModel()" matTooltip="Save">
+			<mat-icon>save</mat-icon>
+		</button>
+		<button mat-icon-button (click)="onLoadModel()" matTooltip="Load model">
+			<mat-icon>folder</mat-icon>
+		</button>
+		<button mat-icon-button matTooltip="Zoom in" id="toolbar-zoom-in" style="display:none;">
+			<mat-icon>zoom_in</mat-icon>
+		</button>
+		<button mat-icon-button matTooltip="Zoom out" id="toolbar-zoom-out" style="display:none;">
+			<mat-icon>zoom_out</mat-icon>
+		</button>
+		<button mat-icon-button (click)="onUndoChange()" matTooltip="Undo" id="toolbar-action-undo">
+			<mat-icon>undo</mat-icon>
+		</button>
+		<button mat-icon-button (click)="onRedoChange()" matTooltip="Redo" id="toolbar-action-redo">
+			<mat-icon>redo</mat-icon>
+		</button>
+		<button mat-icon-button matTooltip="Delete" id="toolbar-action-delete" style="display:none;">
+			<mat-icon>delete</mat-icon>
+		</button>
+		<button mat-icon-button matTooltip="Add new process" aria-label="Button for adding new process to CSD"
+			id="toolbar-action-process" style="display:none;">
+			<mat-icon>device_hub</mat-icon>
+		</button>
+		<button mat-icon-button matTooltip="Fact" id="toolbar-action-fact" style="display:none;">
+			<mat-icon>add</mat-icon>
+		</button>
+		<button mat-icon-button matTooltip="External Fact" id="toolbar-action-external-fact" style="display:none;">
+			<mat-icon>add</mat-icon>
+		</button>
+		<button mat-icon-button matTooltip="Product" id="toolbar-action-product" style="display:none;">
+			<mat-icon>add</mat-icon>
+		</button>
+		<button mat-icon-button matTooltip="Add Edge" id="toolbar-action-edge" style="display:none;">
+			<mat-icon>call_made</mat-icon>
+		</button>
+		<button mat-icon-button matTooltip="Reverse Edge" id="toolbar-action-reverse-edge" style="display:none;">
+			<mat-icon>swap_calls</mat-icon>
+		</button>
+		<button mat-icon-button matTooltip="Change Edge" id="toolbar-action-change-edge" style="display:none;">
+			<mat-icon>call_merge</mat-icon>
+		</button>
+		<!--add other icons to tollbar here> -->
+
+		<span class="fill-remaining-space"></span>
+		<!-- right side of the bar starts here -->
+		<button mat-button matTooltip="Properties" (click)="togglePropertyBar()">
+			<mat-icon>settings</mat-icon>
+			<span style="padding-left: 0.5em">Properties</span>
+		</button>
+	</mat-toolbar>
+
+</div>
+<mat-divider></mat-divider>
+<app-editor-layout></app-editor-layout>

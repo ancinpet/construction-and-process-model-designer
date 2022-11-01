@@ -1,0 +1,17 @@
+.connection-status {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.connection-status-link {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.connection-status-link:active {
+  color: red;
+  text-decoration: underline;
+}
+

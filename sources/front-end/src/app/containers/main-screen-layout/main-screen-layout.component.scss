@@ -1,0 +1,145 @@
+* {
+  box-sizing: border-box;
+}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.iconInHeader {
+  font-size: 40px;
+}
+
+.modelName {
+  font-style: italic;
+}
+
+[class*="col-"] {
+  float: left;
+}
+.col-iconInHeader {
+  width: 30px;
+}
+.col-buttonInHeader {
+  width: 200px;
+}
+
+.col-iconInHeaderPlaceHolder {
+  width: 1.33%;
+}
+
+.col-header {
+  width: 85%;
+}
+
+.col-1 {
+  width: 8.33%;
+}
+
+.col-2 {
+  width: 16.66%;
+}
+
+.col-3 {
+  width: 25%;
+}
+
+.col-4 {
+  width: 33.33%;
+}
+
+.col-5 {
+  width: 41.66%;
+}
+
+.col-6 {
+  width: 50%;
+}
+
+.col-7 {
+  width: 58.33%;
+}
+
+.col-8 {
+  width: 66.66%;
+}
+
+.col-9 {
+  width: 75%;
+}
+
+.col-10 {
+  width: 83.33%;
+}
+
+.col-11 {
+  width: 91.66%;
+}
+
+.col-12 {
+  width: 100%;
+}
+
+html {
+  font-family: "Lucida Sans", sans-serif;
+}
+
+body {
+  height: 100vh;
+}
+
+#leftSide {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  height: 100%;
+}
+
+#rightSide {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+  height: 100%;
+}
+
+#diagramTypes {
+  border-bottom: 1px solid black;
+  padding: 3%;
+  height: 20%;
+}
+
+#treeView {
+  padding: 3%;
+  height: 80%;
+}
+
+#canvas {
+  padding: 3%;
+  height: 100%;
+}
+
+.diagramButtons {
+  width: 100%;
+  height: 30%;
+}
+
+.example-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.fill-remaining-space {
+  flex: 1 1 auto;
+}
+
+.modelNameInput {
+  width: 100%;
+}
+
+

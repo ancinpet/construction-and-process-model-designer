@@ -1,0 +1,150 @@
+<mat-drawer-container class="editor-container">
+		<mat-drawer-content>
+				<app-canvas></app-canvas>
+		</mat-drawer-content>
+		
+		<mat-drawer id="tree-view-sidebar" #sidenavleft opened mode="side" position="start">		
+				<app-tree-view2></app-tree-view2>´
+		</mat-drawer>
+		
+		<mat-drawer id="properties-sidebar" #sidenavright mode="side" position="end">
+			<mat-toolbar style="height:30px;display:none;" id="mxgraph-toolbar">
+				<div id="mxgraph-sidebar-width"><span>CSD & PSD Properties</span></div>
+				<mat-form-field [hidden]="paperHidden" [style.width]="'90%'">
+					<mat-select [(value)]="defaultPaperSizeValue" (selectionChange)="paperSizeChanged()">
+						<mat-option value="AX">Huge (10000 mm²)</mat-option>
+						<mat-option value="A0">A0 (841 mm x 1189 mm)</mat-option>
+						<mat-option value="A1">A1 (594 mm x 841 mm)</mat-option>
+						<mat-option value="A2">A2 (420 mm x 594 mm)</mat-option>
+						<mat-option value="A3">A3 (297 mm x 420 mm)</mat-option>
+						<mat-option value="A4">A4 (210 mm x 297 mm)</mat-option>
+						<mat-option value="A5">A5 (148 mm x 210 mm)</mat-option>
+						<mat-option value="A6">A6 (105 mm x 148 mm)</mat-option>
+						<mat-option value="A7">A7 (74 mm x 105 mm)</mat-option>
+					</mat-select>
+				</mat-form-field>
+				<br [hidden]="paperHidden">
+				<mat-radio-group [hidden]="paperHidden" [(ngModel)]="defaultOrientation" (ngModelChange)="paperSizeChanged()">
+					<mat-radio-button color="primary" value="Portrait">Portrait</mat-radio-button>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+					<mat-radio-button color="primary" value="Landscape">Landscape</mat-radio-button>
+				</mat-radio-group>
+				<br [hidden]="paperHidden">
+				<br [hidden]="paperHidden">
+
+				<label [hidden]="rolePhaseCheckboxHidden">Actor role</label>
+				<br [hidden]="rolePhaseCheckboxHidden">
+				<mat-form-field [hidden]="rolePhaseCheckboxHidden">
+					<mat-select [(ngModel)]="actorRole" (selectionChange)="bindActor(actorRole)">
+						<mat-option *ngFor="let actor of actorList" [value]="actor">
+							{{actor.name}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+				<br [hidden]="rolePhaseCheckboxHidden">
+				<mat-checkbox  [(ngModel)]="transactionPhaseValue" (ngModelChange)="dispatchProperties()" [hidden]="rolePhaseCheckboxHidden" color="primary">Composite role</mat-checkbox>
+				<br [hidden]="roleTypeComboboxHidden">
+				<br [hidden]="roleTypeComboboxHidden">
+				<label [hidden]="roleTypeComboboxHidden">Transaction kind</label>
+				<br [hidden]="roleTypeComboboxHidden">
+				<mat-form-field [hidden]="roleTypeComboboxHidden">
+					<mat-select [(ngModel)]="transactionKind" (selectionChange)="bindTransaction(transactionKind)">
+						<mat-option *ngFor="let transaction of transactionList" [value]="transaction">
+							{{transaction.name}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+				<br [hidden]="roleTypeComboboxHidden">
+				<mat-form-field [hidden]="roleTypeComboboxHidden">
+					<mat-select [(value)]="defaultActorTransactionValue" (selectionChange)="dispatchProperties()">
+						<mat-option value="original">Original</mat-option>
+						<mat-option value="informational">Informational</mat-option>
+						<mat-option value="documental">Documental</mat-option>
+					</mat-select>
+				</mat-form-field>
+
+				<label [hidden]="linkTypeComboboxHidden">Link type</label>
+				<br [hidden]="linkTypeComboboxHidden">
+				<mat-form-field [hidden]="linkTypeComboboxHidden">
+					<mat-select [(value)]="defaultLinkTypeValue" (selectionChange)="dispatchProperties()">
+						<mat-option value="waitLink">Wait link</mat-option>
+						<mat-option value="inspectionLink">Inspection link</mat-option>
+					</mat-select>
+				</mat-form-field>
+				<br [hidden]="waitLinkOptionsHidden">
+				<label [hidden]="waitLinkOptionsHidden">Source cAct</label>
+				<br [hidden]="waitLinkOptionsHidden">
+				<mat-form-field [hidden]="waitLinkOptionsHidden">
+					<mat-select [(value)]="defaultLinkActSource" (selectionChange)="dispatchProperties()">
+						<mat-option value="request">Request</mat-option>
+						<mat-option value="promise">Promise</mat-option>
+						<mat-option value="decline">Decline</mat-option>
+						<mat-option value="quit">Quit</mat-option>
+						<mat-option value="state">State</mat-option>
+						<mat-option value="accept">Accept</mat-option>
+						<mat-option value="reject">Reject</mat-option>
+						<mat-option value="stop">Stop</mat-option>
+					</mat-select>
+				</mat-form-field>
+				<br [hidden]="linkTypeComboboxHidden">
+				<label [hidden]="linkTypeComboboxHidden">Source position</label>
+				<br [hidden]="linkTypeComboboxHidden">
+				<mat-radio-group [hidden]="linkTypeComboboxHidden" [(ngModel)]="defaultLinkSource" (ngModelChange)="dispatchProperties()">
+					<mat-radio-button color="primary" value="Top">Top</mat-radio-button>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+					<mat-radio-button color="primary" value="Bottom">Bottom</mat-radio-button>
+				</mat-radio-group>
+				<br [hidden]="linkTypeComboboxHidden">
+				<br [hidden]="waitLinkOptionsHidden">
+				<label [hidden]="waitLinkOptionsHidden">Target cAct</label>
+				<br [hidden]="waitLinkOptionsHidden">
+				<mat-form-field [hidden]="waitLinkOptionsHidden">
+					<mat-select [(value)]="defaultLinkActTarget" (selectionChange)="dispatchProperties()">
+						<mat-option value="request">Request</mat-option>
+						<mat-option value="promise">Promise</mat-option>
+						<mat-option value="decline">Decline</mat-option>
+						<mat-option value="quit">Quit</mat-option>
+						<mat-option value="state">State</mat-option>
+						<mat-option value="accept">Accept</mat-option>
+						<mat-option value="reject">Reject</mat-option>
+						<mat-option value="stop">Stop</mat-option>
+					</mat-select>
+				</mat-form-field>
+				<br [hidden]="linkTypeComboboxHidden">
+				<label [hidden]="linkTypeComboboxHidden">Target position</label>
+				<br [hidden]="linkTypeComboboxHidden">
+				<mat-radio-group [hidden]="linkTypeComboboxHidden" [(ngModel)]="defaultLinkTarget" (ngModelChange)="dispatchProperties()">
+					<mat-radio-button color="primary" value="Top">Top</mat-radio-button>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+					<mat-radio-button color="primary" value="Bottom">Bottom</mat-radio-button>
+				</mat-radio-group>
+
+				<label [hidden]="cardinalityHidden">Cardinality</label>
+				<br [hidden]="cardinalityHidden">
+				<mat-form-field [hidden]="cardinalityHidden">
+					<input matInput placeholder="Minimum" [formControl]="cardinalityFrom" (ngModelChange)="dispatchProperties()" required>
+					<mat-error *ngIf="cardinalityFrom.invalid">{{cardinalityFromError()}}</mat-error>
+				</mat-form-field>
+				<br [hidden]="cardinalityHidden">
+				<mat-form-field [hidden]="cardinalityHidden">
+					<input matInput placeholder="Maximum" [formControl]="cardinalityTo" (ngModelChange)="dispatchProperties()" required>
+					<mat-error *ngIf="cardinalityTo.invalid">{{cardinalityToError()}}</mat-error>
+				</mat-form-field>
+				<br [hidden]="cardinalityHiddenAct">
+				<label [hidden]="cardinalityHiddenAct">Source cAct</label>
+				<br [hidden]="cardinalityHiddenAct">
+				<mat-form-field [hidden]="cardinalityHiddenAct">
+					<mat-select [(value)]="defaultCasualLinkAct" (selectionChange)="dispatchProperties()">
+						<mat-option value="request">Request</mat-option>
+						<mat-option value="promise">Promise</mat-option>
+						<mat-option value="decline">Decline</mat-option>
+						<mat-option value="quit">Quit</mat-option>
+						<mat-option value="state">State</mat-option>
+						<mat-option value="accept">Accept</mat-option>
+						<mat-option value="reject">Reject</mat-option>
+						<mat-option value="stop">Stop</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</mat-toolbar>	
+		</mat-drawer>
+</mat-drawer-container>

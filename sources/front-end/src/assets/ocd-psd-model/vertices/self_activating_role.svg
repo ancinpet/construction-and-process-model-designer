@@ -1,0 +1,6 @@
+<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+  <rect stroke="#000000" height="100%" width="100" y="0" x="0" fill="{rectangleFill}"/>
+  <circle r="30" cy="50%" cx="50" stroke="#000000" fill="#ffffff"/>
+  <rect transform="rotate(45, 50, 50)" y="30" x="30" height="40" width="40" fill="{diamondFill}" stroke="{diamondStroke}"/>
+  <text x="50" y="57" text-anchor="middle" fill="#ffffff" stroke-width="0" font-size="24" font-family="serif" xml:space="preserve">{transactionNumber}</text>
+</svg>

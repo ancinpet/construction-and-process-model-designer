@@ -1,0 +1,5 @@
+﻿askZoom=Vložte zoom (%)
+properties=Vlastnosti
+outline=Ohraničení
+tasks=Úlohy
+help=Pomoc

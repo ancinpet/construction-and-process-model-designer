@@ -1,0 +1,66 @@
+<div [ngSwitch]="node.type" class="tree-view-node-content">
+  <div *ngSwitchCase="'processes_root'" class="tree-view-routerlink root-node">
+    <a routerLink='/OCD'>{{node.label}}</a>
+  </div>
+  <div *ngSwitchCase="'dataStructure_root'" class="tree-view-routerlink root-node">
+    <a routerLink='/modelerOfd'>{{node.label}}</a>
+  </div>
+  <div *ngSwitchCase="'actionRules_root'" class="tree-view-routerlink root-node tree-view-link" (click)="onCreateActionRule()">
+    {{node.label}}
+  </div>
+  <div *ngSwitchCase="'actorRoles_root'" class="tree-view-nolink root-node">
+    {{node.label}}
+  </div>
+  <div *ngSwitchCase="'transactionKinds_root'" class="tree-view-nolink root-node">
+    {{node.label}}
+  </div>
+  <div *ngSwitchCase="'process'" class="tree-view-link">
+    {{node.label}}
+    <mat-divider style="width:20px" [vertical]="true"></mat-divider>
+    <!-- <button mat-icon-button>
+      <mat-icon class="tree-view-icon" (click)="onContextMenu($event)">
+        add
+      </mat-icon>
+    </button> -->
+
+  </div>
+  <div *ngSwitchCase="'actionRule'" class="tree-view-link" (click)="onEditActionRule(node.id)">
+    {{node.label}}
+    <mat-divider style="width:20px" [vertical]="true"></mat-divider>
+  </div>
+    <div *ngSwitchCase="'actorRole'" class="tree-view-link" (mouseenter)="isMouseOver = true"
+         (mouseleave)="isMouseOver = false">
+      {{node.label}}
+      <mat-divider style="width:20px" [vertical]="true"></mat-divider>
+      <button *ngIf="showActionBtn()" mat-icon-button>
+        <mat-icon class="tree-view-icon" (click)="onRemoveActorRole()">
+          delete_outline
+        </mat-icon>
+      </button>
+
+    </div>
+    <div *ngSwitchCase="'transactionKind'" class="tree-view-link" (mouseenter)="isMouseOver = true"
+         (mouseleave)="isMouseOver = false">
+      {{node.label}}
+      <mat-divider style="width:20px" [vertical]="true"></mat-divider>
+      <button *ngIf="showActionBtn()" mat-icon-button>
+        <mat-icon class="tree-view-icon" (click)="onRemoveTransactionKind()">
+          delete_outline
+        </mat-icon>
+      </button>
+
+    </div>
+    <div *ngSwitchCase="'bpmn'" class="tree-view-link" (mouseenter)="isMouseOver = true"
+         (mouseleave)="isMouseOver = false" (click)="onEditBpmnDiagram(node.id, node.otherId)">
+      {{node.label}}
+      <!-- <mat-divider style="width:10px" [vertical]="true"></mat-divider> -->
+      <button *ngIf="showActionBtn()" mat-icon-button>
+        <mat-icon class="tree-view-icon" (click)="onRemoveBpmnDiagram()">
+          delete_outline
+        </mat-icon>
+      </button>
+    </div>
+    <div *ngSwitchDefault class="tree-view-nolink">
+      {{node.label}}
+    </div>
+  </div>
